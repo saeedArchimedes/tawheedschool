@@ -91,6 +91,14 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <p className="text-lg text-gray-700 leading-relaxed mb-6">
           <span className="font-semibold text-pink-600">Tawheed Educational Center</span> is an Islamic Basic School in Bono Region,Ghana. The school is located in Boadan,Wenchi. Our mission is to develop well-rounded individuals who are knowledgeable, morally upright, and ready to contribute positively to society.
           </p>
+{/* 👉 Inserted new local image (con1.png) here */}
+        <div className="flex justify-center mb-12">
+          <img 
+            src="/assets/con1.png" 
+            alt="School Students" 
+            className="rounded-2xl shadow-xl object-cover w-full max-h-[500px] transform transition duration-500 hover:scale-105"
+          />
+        </div>
           <p className="text-lg text-gray-700 leading-relaxed">
             We believe in creating an environment where students can grow intellectually, spiritually, and socially. Our dedicated team of educators works tirelessly to ensure each student reaches their full potential while maintaining strong connections to their faith and cultural heritage.
           </p>
