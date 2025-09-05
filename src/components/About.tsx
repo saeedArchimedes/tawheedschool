@@ -34,7 +34,7 @@ const About: React.FC = () => {
             About Tawheed Educational Center
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto text-justify">
-            Established with a vision to provide quality Islamic education, we are committed to 
+            Established in 2015 with a vision to provide quality Islamic education, we are committed to 
             nurturing young minds and building future leaders of our community.
           </p>
         </div>
