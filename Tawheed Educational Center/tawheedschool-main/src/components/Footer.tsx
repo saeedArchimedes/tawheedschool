@@ -38,6 +38,7 @@ const Footer: React.FC = () => {
               <li><a href="#admission" className="text-gray-400 hover:text-white transition-colors">Admissions</a></li>
               <li><a href="#gallery" className="text-gray-400 hover:text-white transition-colors">Gallery</a></li>
               <li><a href="#contact" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="#news" className="text-gray-400 hover:text-white transition-colors">News</a></li>
             </ul>
           </div>
 
@@ -78,10 +79,10 @@ const Footer: React.FC = () => {
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-pink-500 flex-shrink-0" />
                 <a 
-                  href="saeedarchimedes115@gmail.com" 
+                  href="mailto:saeedarchimedes115@gmail.com" 
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  info@tawheededucenter.com
+                  saeedarchimedes115@gmail.com
                 </a>
               </div>
             </div>

@@ -69,7 +69,10 @@ const News: React.FC = () => {
                       <h2 className="inline-block bg-white text-black px-4 py-2 rounded-full text-lg font-semibold mb-4">
                         {announcement.title}
                       </h2>
-                      <p className="text-white leading-relaxed text-lg">{announcement.content}</p>
+                      <div 
+                        className="text-white leading-relaxed text-lg prose prose-invert max-w-none"
+                        dangerouslySetInnerHTML={{ __html: announcement.content }}
+                      />
                     </div>
                   </div>
                   

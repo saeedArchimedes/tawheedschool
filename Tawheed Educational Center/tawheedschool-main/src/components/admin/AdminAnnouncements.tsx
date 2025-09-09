@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Plus, Bell, Users, Globe, Trash2, Edit3 } from 'lucide-react';
 import { useData } from '@/contexts/DataContext';
 import { useAuth } from '@/contexts/AuthContext';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const AdminAnnouncements: React.FC = () => {
   const { announcements, addAnnouncement, deleteAnnouncement } = useData();
@@ -10,8 +12,33 @@ const AdminAnnouncements: React.FC = () => {
   const [formData, setFormData] = useState({
     title: '',
     content: '',
-    target: 'teachers' as 'teachers' | 'public' | 'both'
+    target: 'teachers' as 'teachers' | 'public' | 'both',
+    titleBackgroundColor: '#3B82F6', // Default blue
+    contentBackgroundColor: '#FFFFFF' // Default white
   });
+
+  // Rich text editor configuration
+  const quillModules = {
+    toolbar: [
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'color': [] }, { 'background': [] }],
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      ['blockquote', 'code-block'],
+      ['link', 'image'],
+      ['clean']
+    ],
+  };
+
+  const quillFormats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'color', 'background',
+    'align', 'code-block'
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
