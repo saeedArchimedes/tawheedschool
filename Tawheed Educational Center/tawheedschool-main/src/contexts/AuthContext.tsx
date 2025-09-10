@@ -44,7 +44,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (savedUser) {
         try {
           const user = JSON.parse(savedUser);
-          setCurrentUser(user);
+        setCurrentUser(user);
         } catch (e) {
           localStorage.removeItem('currentUser');
         }
@@ -67,12 +67,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error || !userData) {
         // Check if it's an admin trying to login with wrong username
-        if (['saeed', 'hassan'].includes(username)) {
-          return { success: false, message: 'Invalid password' };
-        } else if (username === 'school') {
-          return { success: false, message: 'You are not an SMC' };
-        } else {
-          return { success: false, message: 'Not current teacher of TEC' };
+    if (['saeed', 'hassan'].includes(username)) {
+      return { success: false, message: 'Invalid password' };
+    } else if (username === 'school') {
+      return { success: false, message: 'You are not an SMC' };
+    } else {
+      return { success: false, message: 'Not current teacher of TEC' };
         }
       }
 
@@ -120,10 +120,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase
         .from('users')
         .insert({
-          username: name.toLowerCase(),
-          password,
-          role: 'teacher',
-          name,
+      username: name.toLowerCase(),
+      password,
+      role: 'teacher',
+      name,
           is_first_login: true,
           added_by: currentUser?.username || 'admin',
           attendance_history: []
@@ -149,7 +149,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         attendanceHistory: data.attendance_history || []
       };
 
-      setTeachers(prev => [...prev, newTeacher]);
+    setTeachers(prev => [...prev, newTeacher]);
     } catch (error) {
       console.error('Error adding teacher:', error);
     }
@@ -167,7 +167,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setTeachers(prev => prev.filter(t => t.id !== teacherId));
+    setTeachers(prev => prev.filter(t => t.id !== teacherId));
     } catch (error) {
       console.error('Error deleting teacher:', error);
     }
@@ -189,13 +189,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       // Update local state
-      setTeachers(prev => prev.map(t => 
-        t.id === teacherId 
-          ? { ...t, password: newPassword, isFirstLogin: false }
-          : t
-      ));
-      
-      if (currentUser?.id === teacherId) {
+    setTeachers(prev => prev.map(t => 
+      t.id === teacherId 
+        ? { ...t, password: newPassword, isFirstLogin: false }
+        : t
+    ));
+    
+    if (currentUser?.id === teacherId) {
         const updatedUser = { ...currentUser, password: newPassword, isFirstLogin: false };
         setCurrentUser(updatedUser);
         localStorage.setItem('currentUser', JSON.stringify(updatedUser));

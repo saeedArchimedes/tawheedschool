@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Calendar, Download, Trash2, Upload } from 'lucide-react';
 import { useData } from '@/contexts/DataContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/lib/supabase';
 
 const AdminTimetable: React.FC = () => {
   const { resources, addResource, deleteResource } = useData();
@@ -14,11 +15,32 @@ const AdminTimetable: React.FC = () => {
 
   const timetables = resources.filter(r => r.category === 'timetable');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (formData.title.trim() && selectedFile) {
-      const fileUrl = URL.createObjectURL(selectedFile);
+      try {
+        // Upload file to Supabase Storage
+        const fileExt = selectedFile.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+        const filePath = `timetables/${fileName}`;
+
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('files')
+          .upload(filePath, selectedFile);
+
+        if (uploadError) {
+          console.error('Upload error:', uploadError);
+          alert('Failed to upload file. Please try again.');
+          return;
+        }
+
+        // Get public URL
+        const { data: urlData } = supabase.storage
+          .from('files')
+          .getPublicUrl(filePath);
+
+        const fileUrl = urlData.publicUrl;
       
       addResource({
         title: formData.title.trim(),
@@ -33,6 +55,10 @@ const AdminTimetable: React.FC = () => {
       setFormData({ title: '' });
       setSelectedFile(null);
       setShowAddForm(false);
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        alert('Failed to upload file. Please try again.');
+      }
     }
   };
 

@@ -131,3 +131,13 @@ ALTER PUBLICATION supabase_realtime ADD TABLE uploads;
 ALTER PUBLICATION supabase_realtime ADD TABLE suggestions;
 ALTER PUBLICATION supabase_realtime ADD TABLE admissions;
 ALTER PUBLICATION supabase_realtime ADD TABLE attendance_records;
+
+-- Create storage bucket for files
+INSERT INTO storage.buckets (id, name, public) VALUES ('files', 'files', true);
+
+-- Create storage policies for files bucket
+CREATE POLICY "Allow public read access" ON storage.objects FOR SELECT USING (bucket_id = 'files');
+CREATE POLICY "Allow authenticated users to upload files" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'files' AND auth.role() = 'authenticated');
+CREATE POLICY "Allow authenticated users to update files" ON storage.objects FOR UPDATE USING (bucket_id = 'files' AND auth.role() = 'authenticated');
+CREATE POLICY "Allow authenticated users to delete files" ON storage.objects FOR DELETE USING (bucket_id = 'files' AND auth.role() = 'authenticated');
+

@@ -53,7 +53,13 @@ const AdminAnnouncements: React.FC = () => {
         isRead: false
       });
       
-      setFormData({ title: '', content: '', target: 'teachers' });
+      setFormData({ 
+        title: '', 
+        content: '', 
+        target: 'teachers',
+        titleBackgroundColor: '#3B82F6',
+        contentBackgroundColor: '#FFFFFF'
+      });
       setShowAddForm(false);
     }
   };
@@ -207,19 +213,49 @@ const AdminAnnouncements: React.FC = () => {
               </select>
             </div>
 
+            {/* Background Color Options */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="titleBgColor" className="block text-sm font-medium text-gray-700 mb-2">
+                  Title Background Color
+                </label>
+                <input
+                  type="color"
+                  id="titleBgColor"
+                  value={formData.titleBackgroundColor}
+                  onChange={(e) => setFormData({ ...formData, titleBackgroundColor: e.target.value })}
+                  className="w-full h-10 border border-gray-300 rounded-lg cursor-pointer"
+                />
+              </div>
+              <div>
+                <label htmlFor="contentBgColor" className="block text-sm font-medium text-gray-700 mb-2">
+                  Content Background Color
+                </label>
+                <input
+                  type="color"
+                  id="contentBgColor"
+                  value={formData.contentBackgroundColor}
+                  onChange={(e) => setFormData({ ...formData, contentBackgroundColor: e.target.value })}
+                  className="w-full h-10 border border-gray-300 rounded-lg cursor-pointer"
+                />
+              </div>
+            </div>
+
             <div>
               <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
-                Announcement Content *
+                Announcement Content * (Rich Text Editor)
               </label>
-              <textarea
-                id="content"
+              <div className="border border-gray-300 rounded-lg">
+                <ReactQuill
+                  theme="snow"
                 value={formData.content}
-                onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                rows={6}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                placeholder="Write your announcement content here..."
-                required
-              />
+                  onChange={(content) => setFormData({ ...formData, content })}
+                  modules={quillModules}
+                  formats={quillFormats}
+                  placeholder="Write your announcement content here with rich formatting..."
+                  style={{ minHeight: '200px' }}
+                />
+              </div>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -233,7 +269,13 @@ const AdminAnnouncements: React.FC = () => {
                 type="button"
                 onClick={() => {
                   setShowAddForm(false);
-                  setFormData({ title: '', content: '', target: 'teachers' });
+                  setFormData({ 
+                    title: '', 
+                    content: '', 
+                    target: 'teachers',
+                    titleBackgroundColor: '#3B82F6',
+                    contentBackgroundColor: '#FFFFFF'
+                  });
                 }}
                 className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors duration-200"
               >

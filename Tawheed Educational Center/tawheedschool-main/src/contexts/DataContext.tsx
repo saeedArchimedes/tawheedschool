@@ -346,7 +346,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setResources(prev => prev.filter(r => r.id !== id));
+    setResources(prev => prev.filter(r => r.id !== id));
     } catch (error) {
       console.error('Error deleting resource:', error);
     }
@@ -387,11 +387,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setUploads(prev => prev.map(u => 
-        u.id === id 
-          ? { ...u, status: 'marked', comments, grade }
-          : u
-      ));
+    setUploads(prev => prev.map(u => 
+      u.id === id 
+        ? { ...u, status: 'marked', comments, grade }
+        : u
+    ));
     } catch (error) {
       console.error('Error marking upload:', error);
     }
@@ -409,7 +409,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setUploads([]);
+    setUploads([]);
     } catch (error) {
       console.error('Error clearing uploads:', error);
     }
@@ -446,7 +446,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setAnnouncements(prev => prev.filter(a => a.id !== id));
+    setAnnouncements(prev => prev.filter(a => a.id !== id));
     } catch (error) {
       console.error('Error deleting announcement:', error);
     }
@@ -464,9 +464,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setAnnouncements(prev => prev.map(a => 
-        a.id === id ? { ...a, isRead: true } : a
-      ));
+    setAnnouncements(prev => prev.map(a => 
+      a.id === id ? { ...a, isRead: true } : a
+    ));
     } catch (error) {
       console.error('Error marking announcement read:', error);
     }
@@ -503,9 +503,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setSuggestions(prev => prev.map(s => 
-        s.id === id ? { ...s, isRead: true } : s
-      ));
+    setSuggestions(prev => prev.map(s => 
+      s.id === id ? { ...s, isRead: true } : s
+    ));
     } catch (error) {
       console.error('Error marking suggestion read:', error);
     }
@@ -528,15 +528,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setSuggestions(prev => prev.map(s => 
-        s.id === id ? { 
-          ...s, 
-          reply, 
-          repliedAt: new Date().toISOString(),
-          repliedBy,
-          isRead: true 
-        } : s
-      ));
+    setSuggestions(prev => prev.map(s => 
+      s.id === id ? { 
+        ...s, 
+        reply, 
+        repliedAt: new Date().toISOString(),
+        repliedBy,
+        isRead: true 
+      } : s
+    ));
     } catch (error) {
       console.error('Error adding suggestion reply:', error);
     }
@@ -554,7 +554,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setSuggestions([]);
+    setSuggestions([]);
     } catch (error) {
       console.error('Error clearing suggestions:', error);
     }
@@ -572,7 +572,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setSuggestions(prev => prev.filter(s => s.name !== teacherName));
+    setSuggestions(prev => prev.filter(s => s.name !== teacherName));
     } catch (error) {
       console.error('Error clearing teacher suggestions:', error);
     }
@@ -609,9 +609,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      setAdmissions(prev => prev.map(a => 
-        a.id === id ? { ...a, status } : a
-      ));
+    setAdmissions(prev => prev.map(a => 
+      a.id === id ? { ...a, status } : a
+    ));
     } catch (error) {
       console.error('Error updating admission status:', error);
     }
@@ -639,9 +639,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Utility functions
   const getUnreadCounts = () => {
     return {
-      announcements: announcements.filter(a => !a.isRead).length,
-      suggestions: suggestions.filter(s => !s.isRead).length,
-      uploads: uploads.filter(u => u.status === 'pending').length,
+    announcements: announcements.filter(a => !a.isRead).length,
+    suggestions: suggestions.filter(s => !s.isRead).length,
+    uploads: uploads.filter(u => u.status === 'pending').length,
       admissions: admissions.length, // All admissions are considered unread for admin
       attendance: attendanceRecords.length,
       resources: resources.length, // All resources are considered unread for admin
